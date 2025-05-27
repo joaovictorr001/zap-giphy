@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>GIF para WhatsApp</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    <h1>🎉 Envie um GIF pelo WhatsApp</h1>
+    <form method="post">
+        <input type="text" name="query" placeholder="Digite um tema (ex: gatos)" required>
+        <button type="submit">Buscar GIFs</button>
+    </form>
+
+    {% if gifs %}
+        <h2>Resultados</h2>
+        {% for gif in gifs %}
+            <div class="gif-container">
+                <img src="{{ gif }}" alt="gif">
+                <form method="post" action="/send">
+                    <input type="hidden" name="gif_url" value="{{ gif }}">
+                    <input type="text" name="phone" placeholder="Ex: 5511999999999" required>
+                    <button type="submit">Enviar via WhatsApp</button>
+                </form>
+            </div>
+        {% endfor %}
+    {% endif %}
+</body>
+</html>
+
